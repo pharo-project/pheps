@@ -4,7 +4,6 @@ PhEP {
 	#type: #process,
 	#title: 'PhEP Purpose and Guidelines',
 	#author: 'Esteban Lorenzano',
-	#status: 'Proposal',
 	#created: '15/07/2021'
 }
 ```
