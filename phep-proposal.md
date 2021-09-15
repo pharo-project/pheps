@@ -1,0 +1,126 @@
+
+PhEP {
+	#id: 1,
+	#title: 'PhEP Purpose and Guidelines',
+	#author: 'Esteban Lorenzano',
+	#status: 'Proposal',
+	#type: 'Process',
+	#created: '15/07/2021'
+}
+
+# Abstract 
+This PhEP describes the process to incorporate new features to the Pharo environment and its ecosystem. 
+
+# Motivation
+In order to improve the participation of the community in the development of Pharo, and allow better visibility of the general direction of the environment, we propose the adoption of a process to discus and approve (or reject) important changes and features.  
+The introduction of a more formal system can be seen indeed as the introduction of some bureaucracy we didn't have before and for some probably unnecessary, but along with our perpetual search for community participation, visibility and predictability are also two necessary dimensions for the upcoming Pharo releases.  
+This proposal is largely inspired in (python's PEPs)[1] and it will be taking most of the structure proposed, looking for simplification when the differences of size and culture of our communities allow it.
+
+# Description
+## What is a PhEP?
+PhEP stands for *Pharo Enhancement Proposal*. A PhEP is a design document providing information to the Pharo community, describing a new feature for Pharo or its processes or environment. The PhEP should provide a concise technical specification of the feature and a rationale for the feature.  
+We intend PhEPs to be the primary mechanisms for proposing major new features, for collecting community input on an issue, and for documenting the design decisions that have gone into Pharo. The PhEP author is responsible for building consensus within the community and documenting dissenting opinions.  
+Because the PhEPs are maintained as text files in a versioned repository, their revision history is the (historical record of the feature proposal)[2].  
+
+## PhEP Audience
+The typical primary audience for PhEPs are the developers of the Pharo environment and its virtual machine as well as developers of parts of the "Pharo ecosystem" (the libraries/frameworks/tools not part directly of Pharo but that have an interest for it) .  
+The Pharo Board is also a privileged audience, since is its role to oversight and provide final approval or rejection of the proposals.  
+
+## PhEP Types
+There are four kinds of PhEP:  
+  
+**1, 2 and 3:** "Image", "VM" or "Ecosystem" PhEPs are similar in objective: describes a new feature or implementation (or a removal!) for Pharo, but affects a different place of what is considered "Pharo":  the "image" is what you can get in the "vanilla" image you download as Pharo, the "VM" are the proposals affecting the Pharo Virtual Machine and "Ecosystem" describe some feature that affect what is considered part of the Pharo Ecosystem (libraries, tools used to support developing with Pharo, etc.).  
+**4:** A "process" PhEP describes a process surrounding Pharo, or proposes a change to (or an event in) a process. Process PhEPs are like standards PhEPs but apply to areas other than the Pharo environment itself. They may propose an implementation, but not to Pharo's codebase; they often require community consensus. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in Pharo development.  
+
+## PhEP Workflow
+### What is an enhancement for Pharo?  
+There are tons of things that can be done for Pharo, any idea of a new feature or a change for an already existing feature, but is important that the proposals stay on focus and do not expand besides its concrete objectives (Of course, small enhancements or bugfixes do not require a PhEP).  
+A PhEP requires an "author": someone who pushes the idea and is responsible to make consensus around its idea. Discussing informally with the community before (in pharo-dev list or our discord server) can save time and give the author the chance of fleshing out its proposal, but is not a requirement.  
+In case of approval of the proposal, the author is also responsible of its implementation (made by him or ensured by him in some way).  
+
+### Submitting a PhEP
+In general, the PhEP author is also responsible for the PhEP implementation, but if this is not the case, a responsible should be pointed when submitting a PhEP. 
+Submitting a PhEP means 
+1. submit a Pull Request to the pheps repository, with title and format described below.
+2. send an announcement of the PR (with teh abstract and link provided) to pharo-dev list, to make everybody interested aware of the new submission.
+
+**Pull request title**
+The PR title has also a format to follow, to facilitate working with it: 
+
+[Type] Small description
+E.g: 
+[Process] Guidelines to contribute to Pharo 
+[Image] Move help browser contents outside the image
+[Ecosystem] Autogenerate a PhEPs website to allow better search
+
+**PhEP file name**
+All pheps need to be named accordingly. But at the beginning a phep does not has a number (since the phep number is assigned when approved).
+The pre-approved phep proposal file name will be always: `phep-proposal.md` (it will be renamed as final step for approval).
+
+**PhEP file structure**
+The phep file has different sections (explained in detail below): 
+1. Header
+2. Abstract
+3. Motivation
+4. Description
+
+#### Header
+The header will be a structure with the ston format: 
+
+```
+PhEP {
+	#id: 0,
+	#type: #process,
+	#title: 'PhEP Purpose and Guidelines',
+	#authors: [ 'Esteban Lorenzano' ], 
+	#created: '2021-09-15',
+	#replaces: nil
+}
+```
+ 
+- `id`: the number of the PhEP (it is zero for proposals, the right id will be assigned upon acceptance).
+- `type`: the type of the PhEP, it can be #process, #image, #vm, #ecosystem 
+- `title`: the title of the PhEP
+- `authors`: the author of the PhEP, since there can be more than one, this field is an array.
+- `created`: the date of creation in yyyy-mm-dd format.
+- `replaces`: the id of the PhEPs this PhEP replaces (optional) 
+
+##### Header fields and types
+
+- `#id`: `Integer`.
+- `#type`: `#process`, `#image`, `#vm` or `#ecosystem`.
+- `#title`: `String`
+- `#authors`: `Array` of `String`.
+- `#created`: `String` with **YYYY-MM-DD** format
+- `#replaces`: `Array` of `Integer`.
+
+#### Abstract
+A brief introduction of what you is the goal of the PhEP.
+
+#### Motivation
+Reasons to make the change, adopt the new feature.
+
+#### Description
+A detailed description of the PhEP and its proposed design.
+
+### PhEP Review and Resolution
+The Pharo Board is responsible of reviewing and resolve the PhEP proposal. They may take the job in their hands (the "regular" situation) or they may delegate it to someone else the Pharo Board considers is in condition of taking over the process for this particular PhEP (but notice that the *final* approval is exclusive responsibility of the Pharo Board, without possible delegation.   
+Before its resolution, a PhEP will be reviewed in several steps.   
+1. it will be reviewed in style and consistence.
+2. a review on technical quality and feasibility will be demanded to the core team 
+3. at all moment, the PR will be open for discussion with any member of the community (but again, acceptance or rejection is the job of the Pharo Board).
+4. If the PhEP is rejected, the PR will be closed and no more discussion will be held.
+5. If the PhEP is accepted, the Pharo Board (or its delegate) will assign an id to the proposal, the delegate will ask to rename the proposal file name and incorporate the id to the header, before squashing and merging the PR into `main` branch. 
+5. Once integrated, the PhEP need to be be moved to `integrated/pharo-version` directory.
+
+### PhEP Maintenance
+
+It can happen that a PhEP replaces the feature or process described in another PhEP. In this case, several steps needs to be taken: 
+
+1. the replaced PhEP(s) need to be moved to `replaced/pharo-version`.
+2. the replacing PhEP header need to incorporate the field `replaces`. 
+
+# References and footnotes
+
+[1] https://www.python.org/dev/peps/pep-0001
+[2] http://github.com/pharo-project/pheps
