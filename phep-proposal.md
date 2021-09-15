@@ -1,10 +1,10 @@
 ```
 PhEP {
-	#id: 1,
+	#id: 0,
+	#type: #process,
 	#title: 'PhEP Purpose and Guidelines',
 	#author: 'Esteban Lorenzano',
 	#status: 'Proposal',
-	#type: 'Process',
 	#created: '15/07/2021'
 }
 ```
