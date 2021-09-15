@@ -12,14 +12,14 @@ PhEP {
 This PhEP describes the process to incorporate new features to the Pharo environment and its ecosystem. 
 
 # Motivation
-In order to improve the participation of the community in the development of Pharo, and allow better visibility of the general direction of the environment, we propose the adoption of a process to discus and approve (or reject) important changes and features.  
+In order to improve the participation of the community in the development of Pharo, and allow better visibility of the general direction of the environment, we propose the adoption of a process to discuss and approve (or reject) important changes and features.  
 The introduction of a more formal system can be seen indeed as the introduction of some bureaucracy we didn't have before and for some probably unnecessary, but along with our perpetual search for community participation, visibility and predictability are also two necessary dimensions for the upcoming Pharo releases.  
 This proposal is largely inspired in [python's PEPs](https://www.python.org/dev/peps/pep-0001) and it will be taking most of the structure proposed, looking for simplification when the differences of size and culture of our communities allow it.
 
 # Description
 ## What is a PhEP?
-PhEP stands for *Pharo Enhancement Proposal*. A PhEP is a design document providing information to the Pharo community, describing a new feature for Pharo or its processes or environment. The PhEP should provide a concise technical specification of the feature and a rationale for the feature.  
-We intend PhEPs to be the primary mechanisms for proposing major new features, for collecting community input on an issue, and for documenting the design decisions that have gone into Pharo. The PhEP author is responsible for building consensus within the community and documenting dissenting opinions.  
+PhEP stands for *Pharo Enhancement Proposal*. A PhEP is a design document providing information to the Pharo community, describing a new feature for Pharo or its processes or environment. The PhEP should provide a concise technical specification of the feature, a reference implementation, and a rationale for the feature.  
+We intend PhEPs to be the primary mechanisms for proposing major new features, for collecting community input on an issue, and for documenting the design decisions that have gone into Pharo. The PhEP author is responsible for building consensus within the community, documenting dissenting opinions and providing implementation.  
 Because the PhEPs are maintained as text files in a versioned repository, their revision history is the [historical record of the feature proposal](http://github.com/pharo-project/pheps).  
 
 ## PhEP Audience
@@ -36,7 +36,7 @@ There are four kinds of PhEP:
 ## PhEP Workflow
 ### What is an enhancement for Pharo?  
 There are tons of things that can be done for Pharo, any idea of a new feature or a change for an already existing feature, but is important that the proposals stay on focus and do not expand besides its concrete objectives (Of course, small enhancements or bugfixes do not require a PhEP).  
-A PhEP requires an "author": someone who pushes the idea and is responsible to make consensus around its idea. Discussing informally with the community before (in pharo-dev list or our discord server) can save time and give the author the chance of fleshing out its proposal, but is not a requirement.  
+A PhEP requires an "author": someone who pushes the idea, provide an implementation and is responsible to make consensus around its idea. Discussing informally with the community before (in pharo-dev list or our discord server) can save time and give the author the chance of fleshing out its proposal, but is not a requirement.  
 In case of approval of the proposal, the author is also responsible of its implementation (made by him or ensured by him in some way).  
 
 ### Submitting a PhEP
