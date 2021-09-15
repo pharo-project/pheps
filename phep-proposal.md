@@ -1,4 +1,4 @@
-
+```
 PhEP {
 	#id: 1,
 	#title: 'PhEP Purpose and Guidelines',
@@ -7,6 +7,7 @@ PhEP {
 	#type: 'Process',
 	#created: '15/07/2021'
 }
+```
 
 # Abstract 
 This PhEP describes the process to incorporate new features to the Pharo environment and its ecosystem. 
@@ -14,13 +15,13 @@ This PhEP describes the process to incorporate new features to the Pharo environ
 # Motivation
 In order to improve the participation of the community in the development of Pharo, and allow better visibility of the general direction of the environment, we propose the adoption of a process to discus and approve (or reject) important changes and features.  
 The introduction of a more formal system can be seen indeed as the introduction of some bureaucracy we didn't have before and for some probably unnecessary, but along with our perpetual search for community participation, visibility and predictability are also two necessary dimensions for the upcoming Pharo releases.  
-This proposal is largely inspired in (python's PEPs)[1] and it will be taking most of the structure proposed, looking for simplification when the differences of size and culture of our communities allow it.
+This proposal is largely inspired in [python's PEPs][1] and it will be taking most of the structure proposed, looking for simplification when the differences of size and culture of our communities allow it.
 
 # Description
 ## What is a PhEP?
 PhEP stands for *Pharo Enhancement Proposal*. A PhEP is a design document providing information to the Pharo community, describing a new feature for Pharo or its processes or environment. The PhEP should provide a concise technical specification of the feature and a rationale for the feature.  
 We intend PhEPs to be the primary mechanisms for proposing major new features, for collecting community input on an issue, and for documenting the design decisions that have gone into Pharo. The PhEP author is responsible for building consensus within the community and documenting dissenting opinions.  
-Because the PhEPs are maintained as text files in a versioned repository, their revision history is the (historical record of the feature proposal)[2].  
+Because the PhEPs are maintained as text files in a versioned repository, their revision history is the [historical record of the feature proposal][2].  
 
 ## PhEP Audience
 The typical primary audience for PhEPs are the developers of the Pharo environment and its virtual machine as well as developers of parts of the "Pharo ecosystem" (the libraries/frameworks/tools not part directly of Pharo but that have an interest for it) .  
@@ -65,7 +66,7 @@ The phep file has different sections (explained in detail below):
 4. Description
 
 #### Header
-The header will be a structure with the ston format: 
+The header will be a structure with STON format enclosed in markdown code block (to enhance visibility): 
 
 ```
 PhEP {
@@ -122,5 +123,5 @@ It can happen that a PhEP replaces the feature or process described in another P
 
 # References and footnotes
 
-[1] https://www.python.org/dev/peps/pep-0001
-[2] http://github.com/pharo-project/pheps
+[1] https://www.python.org/dev/peps/pep-0001  
+[2] http://github.com/pharo-project/pheps  
