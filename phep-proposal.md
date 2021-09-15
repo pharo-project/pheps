@@ -114,10 +114,18 @@ Before its resolution, a PhEP will be reviewed in several steps.
 5. If the PhEP is accepted, the Pharo Board (or its delegate) will assign an id to the proposal, the delegate will ask to rename the proposal file name and incorporate the id to the header, before squashing and merging the PR into `main` branch. 
 5. Once integrated, the PhEP need to be be moved to `integrated/pharo-version` directory.
 
+#### Reasons to reject a PhEP
+There are plenty of reasons why a PhEP can be rejected, but just to point the obvious:  
+1. The PhEP is not written clearly or it lacks focus.
+2. The PhEP is in contradiction with another idea being implemented (or already there).
+3. The PhEP does not fits with the Pharo vision and its goals.
+
 ### PhEP Maintenance
 
 It can happen that a PhEP replaces the feature or process described in another PhEP. In this case, several steps needs to be taken: 
 
 1. the replaced PhEP(s) need to be moved to `replaced/pharo-version`.
 2. the replacing PhEP header need to incorporate the field `replaces`. 
+
+
 
