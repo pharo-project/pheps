@@ -3,8 +3,8 @@ PhEP {
 	#id: 0,
 	#type: #process,
 	#title: 'PhEP Purpose and Guidelines',
-	#author: 'Esteban Lorenzano',
-	#created: '15/07/2021'
+	#authors: [ 'Esteban Lorenzano' ],
+	#created: '2021-07-15'
 }
 ```
 
@@ -29,8 +29,9 @@ The Pharo Board is also a privileged audience, since is its role to oversight an
 ## PhEP Types
 There are four kinds of PhEP:  
   
-**1, 2 and 3:** "Image", "VM" or "Ecosystem" PhEPs are similar in objective: describes a new feature or implementation (or a removal!) for Pharo, but affects a different place of what is considered "Pharo":  the "image" is what you can get in the "vanilla" image you download as Pharo, the "VM" are the proposals affecting the Pharo Virtual Machine and "Ecosystem" describe some feature that affect what is considered part of the Pharo Ecosystem (libraries, tools used to support developing with Pharo, etc.).  
-**4:** A "process" PhEP describes a process surrounding Pharo, or proposes a change to (or an event in) a process. Process PhEPs are like standards PhEPs but apply to areas other than the Pharo environment itself. They may propose an implementation, but not to Pharo's codebase; they often require community consensus. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in Pharo development.  
+**1, 2 and 3**: "Image", "VM" or "Ecosystem" PhEPs are similar in objective: describes a new feature or implementation (or a removal!) for Pharo, but affects a different place of what is considered "Pharo":  the "image" is what you can get in the "vanilla" image you download as Pharo, the "VM" are the proposals affecting the Pharo Virtual Machine and "Ecosystem" describe some feature that affect what is considered part of the Pharo Ecosystem (libraries, tools used to support developing with Pharo, etc.).  
+
+**4**: A "Process" PhEP describes a process surrounding Pharo, or proposes a change to (or an event in) a process. Process PhEPs are like standards PhEPs but apply to areas other than the Pharo environment itself. They may propose an implementation, but not to Pharo's codebase; they often require community consensus. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in Pharo development.  
 
 ## PhEP Workflow
 ### What is an enhancement for Pharo?  
