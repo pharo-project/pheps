@@ -30,7 +30,7 @@ There is a small list of requirements we have put in white and black for what we
 	- class comment. Useful (what is it? why?)
 	- package comment. Description of the design of the tool
 	- method comment for informative comment, explanation of intent, clarification or warning. Do not use a comment when you can use a method or a variable to reveal the intent! You can read https://www.baeldung.com/cs/clean-code-comments for more information.
-4. code quality (if, cyclomatic complexity, etc.).
+4. code quality (See anex *What we consider quality code*).
 5. If this is a big project: installation instruction, CI
 
 ## PR acceptance
@@ -45,3 +45,27 @@ The parameters for PR acceptance will be:
 4. does not break release tests
 5. respect modularity of the system (i.e. it does not introduces new dependencies on other parts of the system if not required).
 
+# Anexes
+
+## Annex 1: What we consider quality code
+This is a complex matter since appreciation of what is good code contains always a certain level of subjectivity. Nevertheless, we try to follow certain guidelines (understanding that everything is subject to reviewer appreciation of the problem).  
+This is our current quality review check list:  
+- Am I able to understand the code easily (names reveal the intention, comments should explain *what is not obvious*)?
+- Is the code written following the coding standards/guidelines?
+	- Keep the design simple.
+	- Follow Object Oriented Design
+	    S - Single-responsiblity Principle : A class should have one and only one reason to change, meaning that a class should have only one job.
+	    O - Open-closed Principle: Objects or entities should be open for extension but closed for modification.
+	    L - Liskov Substitution Principle: Every subclass or derived class should be substitutable for their base or parent class.
+	    I - Interface Segregation Principle: A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use.
+	    D - Dependency Inversion Principle: Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.
+	- Be consistent (naming, order, formatting)
+	- Avoid references to globals
+	- No magic numbers (use constants, configuration values)
+	- Avoid multiple if blocks
+	- Method should have at most 3 arguments (unless there are good reasons, like in FFI calls) 
+	- Each method should work at a single level of abstraction
+- Is the same code duplicated unnecesarily?
+- Is this method too big (more than 10 lines)? If yes, is the method having too many responsibilities?
+- Can I unit test/debug the code easily to find the root cause?
+- Is this code documented if needed, it includes examples of usage and unit tests?
