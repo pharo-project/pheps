@@ -68,4 +68,4 @@ This is our current quality review check list:
 - Is the same code duplicated unnecesarily?
 - Is this method too big (more than 10 lines)? If yes, is the method having too many responsibilities?
 - Can I unit test/debug the code easily to find the root cause?
-- Is this code documented if needed, it includes examples of usage and unit tests?
+- Is this code documented when needed? Does it include examples of usage and unit tests?
