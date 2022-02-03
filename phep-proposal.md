@@ -54,11 +54,11 @@ This is our current quality review check list:
 - Is the code written following the coding standards/guidelines?
 	- Keep the design simple.
 	- Follow Object Oriented Design
-	    S - Single-responsiblity Principle : A class should have one and only one reason to change, meaning that a class should have only one job.
-	    O - Open-closed Principle: Objects or entities should be open for extension but closed for modification.
-	    L - Liskov Substitution Principle: Every subclass or derived class should be substitutable for their base or parent class.
-	    I - Interface Segregation Principle: A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use.
-	    D - Dependency Inversion Principle: Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.
+	    1. S - Single-responsiblity Principle : A class should have one and only one reason to change, meaning that a class should have only one job.
+	    2. O - Open-closed Principle: Objects or entities should be open for extension but closed for modification.
+	    3. L - Liskov Substitution Principle: Every subclass or derived class should be substitutable for their base or parent class.
+	    4. I - Interface Segregation Principle: A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use.
+	    5. D - Dependency Inversion Principle: Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.
 	- Be consistent (naming, order, formatting)
 	- Avoid references to globals
 	- No magic numbers (use constants, configuration values)
