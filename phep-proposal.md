@@ -20,7 +20,7 @@ As the wikipedia states, "String interpolation is an alternative to building str
 Pharo supports several ways to format text strings. It implements string concatenation (with the #, message) and string "printf" style formatting (with the #format: message), along with other more or less derivated from this two (macro replacing, stream contents, etc. all are variations in this style).
 Each of this mechanism have advantages, but all have as fundamental disadvantage the fact they become cumbersome to use in practice.  
 Take into account this different implementations of the same string concatenation, compared with the one proposed:  
-```
+```Smalltalk
 'Hello ', name, ', what can I do for you?'.
 'Hello {1}, what can I do for you?' format: { name }.
 'Hello {name}, what can I do for you?' format: { #name -> name } asDictionary.
@@ -32,6 +32,33 @@ This will show clearly the limitations of the first two mechanisms:
 
 This PhEP does not removes or deprecates the mechanism already existing, it adds a new one.  
 
+## Prototype implementation
+
 About implementation details, there is already a prototype made by @guillep: https://github.com/guillep/pharo-string-interpolation
+
+## Design
+
+The overal design is very simple, thanks to the infrastructure we have built before: We implement it as a **compiler plugin** that will pre-process.  
+The basic code is: 
+
+- we create a plugin (from `OCCompilerASTPlugin`)
+- in `transform` method, we find the string literals
+- we ask if they have an interpolation
+- if there are no interpolation, we return and compilation continues and we are the happy owners of a string literal.
+- if there are interpolation, we replace the literal with a message send that will actually execute the interpolation
+	
+in the compiled method, this code:
+```Smalltalk
+greet := 'Hello {name}, what can I do for you?'.
+```
+will become something like: 
+```Smalltalk
+greet := StringInterpolator 
+	interpolate: 'Hello {name}, what can I do for you?'
+	withAssociations: { #name -> name }.
+.
+```
+	
+NOTE: This is how the prototype is working now, we still need to solve some minor issues. 
 
 
