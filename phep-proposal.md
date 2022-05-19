@@ -12,25 +12,26 @@ PhEP {
 A proposal for incluide [String interpolation](https://en.wikipedia.org/wiki/String_interpolation) as part of the Pharo language.
 
 # Motivation
-Many of our work today includes some kind of string manipulation (to show messages, write logs, whatever), and the code becomes easily illegible, you can find examples of this all around the image and projects of the ecosystem. This is specially important in projects for the web (producing pages or exchanging data in the form of JSON), since they are usually very "string" dependent.
-This PhEP has as objective to add a simpler way to format strings in Pharo, other than concatenating (which becomes verbose and confusing) and formatting (which puts the variables to insert far from their insertion point).
+Many of our work today includes some kind of string manipulation (to show messages, write logs, whatever), and the code becomes easily illegible, you can find examples of this all around the image and projects of the ecosystem. This is specially important in projects for the web (producing pages or exchanging data in the form of JSON), since they are usually very "string" dependent.  
+This PhEP has as objective to add a simpler way to format strings in Pharo, other than concatenating (which becomes verbose and confusing) and formatting (which puts the variables to insert far from their insertion point).  
 
 # Description 
-As the wikipedia states, "String interpolation is an alternative to building string via concatenation, which requires repeated quoting and unquoting; or substituting into a printf format string, where the variable is far from where it is used". 
+As the wikipedia states, "String interpolation is an alternative to building string via concatenation, which requires repeated quoting and unquoting; or substituting into a printf format string, where the variable is far from where it is used".  
 Pharo supports several ways to format text strings. It implements string concatenation (with the #, message) and string "printf" style formatting (with the #format: message), along with other more or less derivated from this two (macro replacing, stream contents, etc. all are variations in this style).
-Each of this mechanism have advantages, but all have as fundamental disadvantage the fact they become cumbersome to use in practice.   
-Take into account this different implementations of the same string concatenation, compared with the one proposed: 
+Each of this mechanism have advantages, but all have as fundamental disadvantage the fact they become cumbersome to use in practice.  
+Take into account this different implementations of the same string concatenation, compared with the one proposed:  
 ```
 'Hello ', name, ', what can I do for you?'.
 'Hello {1}, what can I do for you?' format: { name }.
 'Hello {name}, what can I do for you?' format: { #name -> name } asDictionary.
 'Hello {name}, what can I do for you?'.
 ```
-This will show clearly the limitations of the first two mechanisms: 
-1. string concatenation adds closing string, concatenation, opening string each time we want to insert a variable, making the string difficult to read and the expression difficult to understand. This explodes when we need to do it with several variables (or even expressions). 
-2. string "printf" formatting preserves the string readability, but puts the variables or expressions very far away making difficult to match one and the other (even when using "named" insertion points).
+This will show clearly the limitations of the first two mechanisms:  
+1. string concatenation adds closing string, concatenation, opening string each time we want to insert a variable, making the string difficult to read and the expression difficult to understand. This explodes when we need to do it with several variables (or even expressions).  
+2. string "printf" formatting preserves the string readability, but puts the variables or expressions very far away making difficult to match one and the other (even when using "named" insertion points).  
 
-This PhEP does not removes or deprecates the mechanism already existing, it adds a new possibility.
+This PhEP does not removes or deprecates the mechanism already existing, it adds a new one.  
 
 About implementation details, there is already a prototype made by @guillep: https://github.com/guillep/pharo-string-interpolation
+
 
