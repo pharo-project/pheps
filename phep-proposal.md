@@ -56,9 +56,10 @@ will become something like:
 greet := StringInterpolator 
 	interpolate: 'Hello {name}, what can I do for you?'
 	withAssociations: { #name -> name }.
-.
 ```
-	
+
+Implementation details are still to be defined, this could even be a simple call to `#format:` (already existent in String).
+
 NOTE: This is how the prototype is working now, we still need to solve some minor issues. 
 
 
