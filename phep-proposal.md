@@ -9,7 +9,7 @@ PhEP {
 ```
 
 # Abstract
-A proposal to incluide [String interpolation](https://en.wikipedia.org/wiki/String_interpolation) as part of the Pharo language.
+A proposal to include [String interpolation](https://en.wikipedia.org/wiki/String_interpolation) as part of the Pharo language.
 
 # Motivation
 Many of our work today includes some kind of string manipulation (to show messages, write logs, whatever), and the code becomes easily illegible, you can find examples of this all around the image and projects of the ecosystem. This is specially important in projects for the web (producing pages or exchanging data in the form of JSON), since they are usually very "string" dependent.  
