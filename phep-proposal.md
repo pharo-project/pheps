@@ -22,7 +22,7 @@ To provide a generic way of embedding large or expensive-to-construct, but ultim
 
 ## Syntax
 
-The proposed syntax is `##(<sequence>)`, where `<sequence>` is an `RBSequenceNode`, that is, zero-or-more temps (almost always none) followed by zero-or-more (almost always exactly one) statement(s). This syntax can appear anywhere a literal value such as `1` or `#foo` is valid, including within an array.
+The proposed syntax is `##(<sequence>)`, where `<sequence>` is an `RBSequenceNode`, that is, zero-or-more temps (almost always none) followed by zero-or-more (almost always exactly one) statement(s). (While the use of proper sequences--multiple statements with possible temps--is uncommon and perhaps unwise, we cannot *prevent* it due to the existence of blocks, so the path of least resistance is to simply support it directly.) This syntax can appear anywhere a literal value such as `1` or `#foo` is valid, including within an array.
 
 ### Note on ambiguity
 
@@ -75,6 +75,14 @@ The parser should be a straight port from Dolphin--in summary:
 * New parse node class, `RBOptimizedNode`, under `RBValueNode`--sibling to `RBLiteralNode`.
 * New lexer token class, `RBOptimizedToken`, with additional case in `RBCanner>>scanLiteral`.
 * New `RBParser>>parseOptimizedExpression`, called when an optimized token is encountered as a primitive value or within another literal.
+
+#### Error reporting
+
+The body of a compile-time expression is parsed in the same pass as the rest of the method, so parse errors are reported as normal. If an error occurs when evaluating the compile-time expression, this should either:
+* Produce a walkback similar to if the expression had been evaluated directly as a DoIt, or
+* Appear in the UI similar to a parse error, with the error range set to the entirety of the compile-time expression and the specific error message as the tooltip etc.
+
+Some thought is probably needed as to when to take each approach--the walkback is the most straightforward for interactive development, but when loading code from disk it may be preferable to treat the method like any other compilation failure...though I realize I don't know if Pharo has the ability, as Dolphin does, to install a stub method with the correct source but which simply throws an error when called. Fully compiling the rest of the method but giving the CTE a value of `nil` could be a viable in-between approach that would for sure leave the source intact for the user to fix.
 
 ### Syntax highlighting, formatting, etc
 
