@@ -12,7 +12,11 @@ PhEP {
 This PhEP describes an extension to the compiler that allows arbitrary expressions to be evaluated at compile time, with the results stored in the method's literal frame. This is inspired by and will be compatible with the implementation in Dolphin Smalltalk. I refer to such expressions interchangeably as "compile-time literals", "compile-time expressions", and "optimized expressions".
 
 # Motivation
-To provide a generic way of embedding large or expensive-to-construct, but ultimately static, objects within a method. This can result in more readable code by keeping e.g. lookup tables closer to their usage rather than storing them in class variables and lumping the values together in #initialize. More generally, it acts as a fully-generic (if not always the most concise) "object literal" which is automatically compatible with any conceivable custom data structure etc, and does not risk violating invariants by manipulating instance variables directly.
+To provide a generic way of embedding large or expensive-to-construct, but ultimately static, objects within a method. This can result in more readable code by keeping e.g. lookup tables closer to their usage rather than storing them in class variables and lumping the values together in #initialize. More generally, it acts as a fully-generic (if not always the most concise) "object literal". I see the advantages of this approach over more specific object or dictionary literals being:
+* Automatically compatible with any conceivable custom data structure etc.
+* Does not risk violating invariants by manipulating instance variables directly.
+* Minimal extension to the syntax (a single additional type of parse node with strong similarities to existing types).
+* Compatibility with other Smalltalk dialects (this syntax originates in Dolphin and there is a community implementation available for VisualWorks).
 
 # Description
 
@@ -71,6 +75,10 @@ The parser should be a straight port from Dolphin--in summary:
 * New parse node class, `RBOptimizedNode`, under `RBValueNode`--sibling to `RBLiteralNode`.
 * New lexer token class, `RBOptimizedToken`, with additional case in `RBCanner>>scanLiteral`.
 * New `RBParser>>parseOptimizedExpression`, called when an optimized token is encountered as a primitive value or within another literal.
+
+### Syntax highlighting, formatting, etc
+
+Formatting should be able to be ported from Dolphin, syntax-highlighting is just a matter of recognizing the ##() as punctuation similar to {}[]() (because the contents can be an arbitrary expression, Dolphin does *not* give the parens any special "literal" color).
 
 ### Code Generation
 
