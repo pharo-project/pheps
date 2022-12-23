@@ -20,7 +20,7 @@ It will ease a lot Pharo learning as well as improving code readability.
 
 # Description
 The implementation could be divided into different steps:
-1. Introduce `!=` and `!==` selectors calling `!=` and `!==` respectively
+1. Introduce `!=` and `!==` selectors calling `~=` and `~~` respectively
 2. Make `!=` and `!==` as fast as `~=` and `~~`. Indeed, `~=` and `~~` are part of the special selectors array that is used by the bytecode generator of Opal Compiler. These specials selectors have a dedicated bytecode in Sista v1 encoder (see `EncoderForSistaV1>>#genSendSpecial:numArgs:`).
 3. Detect packages that are meant to run on quite old Pharo versions (all the Zinc packages, Fuel by example)
 4. Update all uses of `!=` and `!==` in the Pharo standard image but the packages detected in 3. to use `!=` and `!==`
