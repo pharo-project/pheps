@@ -2,6 +2,7 @@
 PhEP {
 	#id: 0,
 	#type: #image,
+	#status: #discussion,
 	#title: 'String interpolation for Pharo',
 	#authors: [ 'Esteban Lorenzano' ],
 	#created: '2022-05-19'
@@ -24,7 +25,7 @@ Take into account this different implementations of the same string concatenatio
 'Hello ', name, ', what can I do for you?'.
 'Hello {1}, what can I do for you?' format: { name }.
 'Hello {name}, what can I do for you?' format: { #name -> name } asDictionary.
-'Hello {name}, what can I do for you?'.
+'Hello [name], what can I do for you?'.
 ```
 This will show clearly the limitations of the first two mechanisms:  
 1. string concatenation adds closing string, concatenation, opening string each time we want to insert a variable, making the string difficult to read and the expression difficult to understand. This explodes when we need to do it with several variables (or even expressions).  
@@ -49,17 +50,29 @@ The basic code is:
 	
 in the compiled method, this code:
 ```Smalltalk
-greet := 'Hello {name}, what can I do for you?'.
+greet := 'Hello [name], what can I do for you?'.
 ```
 will become something like: 
 ```Smalltalk
 greet := StringInterpolator 
-	interpolate: 'Hello {name}, what can I do for you?'
+	interpolate: 'Hello [name], what can I do for you?'
 	withAssociations: { #name -> name }.
 ```
 
-Implementation details are still to be defined, this could even be a simple call to `#format:` (already existent in String).
+Implementation details are still to be defined, this could even be a simple call to `#format:` (already existent in String).  
 
 NOTE: This is how the prototype is working now, we still need to solve some minor issues. 
 
+
+### Backwards compatibility
+There may be cases where the string interpolation mechanism is incompatible with already existing packages. To allow this packages to be loaded we will add the capability to disable string interpolation as per package or class basis.
+
+### Tooling
+The main restriction for the adoption of string interpolation is the functionning of the tools. For this, we need to make special attention for it to work properly and in a non disruptive way.  
+A particular case of it is the debugger. Ideally the stepping on it will not be disturbed by the fact the bytecodes will be affected in presence of interpolated strings. As this objective is hard to achieve, the minimum acceptable interaction level is "to behave as optimized code does now", which means it steps reasonable well, but it does not deoptimize the code.  
+
+### About the syntax to use
+The proposal is taking @dionisiydk idea of using block syntax for interpolable strings instead of curly braces. This approach has some obvious advantages: 
+- being "as a block", entry point for new users is a lot easier than learning a new syntax.
+- interpolation strings become compatible "by design" with other ways of construct strings: #format:, #tokens, etc.
 
