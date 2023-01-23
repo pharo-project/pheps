@@ -65,7 +65,7 @@ NOTE: This is how the prototype is working now, we still need to solve some mino
 
 
 ### Backwards compatibility
-There may be cases where the string interpolation mechanism is incompatible with already existing packages. To allow this packages to be loaded we will add the capability to disable string interpolation as per package or class basis.
+There may be cases where the string interpolation mechanism is incompatible with already existing packages. To allow these packages to be loaded we will add the ability to disable string interpolation as per package or class basis.
 
 ### Tooling
 The main restriction for the adoption of string interpolation is the functionning of the tools. For this, we need to make special attention for it to work properly and in a non disruptive way.  
