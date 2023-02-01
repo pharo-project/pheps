@@ -67,6 +67,15 @@ NOTE: This is how the prototype is working now, we still need to solve some mino
 ### Backwards compatibility
 There may be cases where the string interpolation mechanism is incompatible with already existing packages. To allow these packages to be loaded we will add the ability to disable string interpolation as per package or class basis.
 
+### Syntax escape
+Inside a string, the way to escape the symbol that marks an interpolated string ([]) is by using a slash previously. E.g.
+```Smalltalk
+Hello, this is an \[escaped\] string`.
+```
+
+### Interpolation error
+When you add an interpolated string, there is always a posibility to make a mistake. E.g. if when typing `'this is an [error`(not closing it). Current prototype just ignores the interpolation, but we believe there should be a syntax error thrown.
+
 ### Tooling
 The main restriction for the adoption of string interpolation is the functionning of the tools. For this, we need to make special attention for it to work properly and in a non disruptive way.  
 A particular case of it is the debugger. Ideally the stepping on it will not be disturbed by the fact the bytecodes will be affected in presence of interpolated strings. As this objective is hard to achieve, the minimum acceptable interaction level is "to behave as optimized code does now", which means it steps reasonable well, but it does not deoptimize the code.  
