@@ -70,7 +70,7 @@ There may be cases where the string interpolation mechanism is incompatible with
 ### Syntax escape
 Inside a string, the way to escape the symbol that marks an interpolated string ([]) is by using a slash previously. E.g.
 ```Smalltalk
-Hello, this is an \[escaped\] string`.
+'Hello, this is an \[escaped\] string'.
 ```
 
 ### Interpolation error
