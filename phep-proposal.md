@@ -74,7 +74,7 @@ Hello, this is an \[escaped\] string`.
 ```
 
 ### Interpolation error
-When you add an interpolated string, there is always a posibility to make a mistake. E.g. if when typing `'this is an [error`(not closing it). Current prototype just ignores the interpolation, but we believe there should be a syntax error thrown.
+When you add an interpolated string, there is always a posibility to make a mistake. E.g. if when typing `'this is an [error'`(not closing it). Current prototype just ignores the interpolation, but we believe there should be a syntax error thrown.
 
 ### Tooling
 The main restriction for the adoption of string interpolation is the functionning of the tools. For this, we need to make special attention for it to work properly and in a non disruptive way.  
