@@ -72,6 +72,7 @@ Inside a string, the way to escape the symbol that marks an interpolated string 
 ```Smalltalk
 'Hello, this is an \[escaped] string'.
 'Hello, this is an [unescaped] string'.
+'Hello, this is also an \\[unescaped] string'.
 ```
 
 ### Interpolation error
