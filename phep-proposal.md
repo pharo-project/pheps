@@ -9,7 +9,7 @@ PhEP {
 ```
 
 # Abstract 
-This PhEP describes an extension to the compiler that allows arbitrary expressions to be evaluated at compile time, with the results stored in the method's literal frame. This is inspired by and will be compatible with the implementation in Dolphin Smalltalk. I refer to such expressions interchangeably as "compile-time literals", "compile-time expressions", and "optimized expressions".
+This PhEP describes an extension to the compiler that allows arbitrary expressions to be evaluated at compile time, with the results stored in the method's literal frame. This is inspired by and will be compatible with the implementation in Dolphin Smalltalk. I refer to such expressions interchangeably as "compile-time literals", "compile-time expressions" (or simply CTEs), and "optimized expressions".
 
 # Motivation
 To provide a generic way of embedding large or expensive-to-construct, but ultimately static, objects within a method. This can result in more readable code by keeping e.g. lookup tables closer to their usage rather than storing them in class variables and lumping the values together in #initialize. More generally, it acts as a fully-generic (if not always the most concise) "object literal". I see the advantages of this approach over more specific object or dictionary literals being:
@@ -32,7 +32,11 @@ I propose deprecating both multiple hashes and hash-less symbols in arrays, with
 
 ## Semantics
 
-`<sequence>` is evaluated similarly to a DoIt, with the instance class of the method as the receiver--that is, the receiver is `Object` whether the method is `Object>>foo` or `Object class>>foo`. The value of the last statement is stored in the method's literal frame, and the expression is treated as a literal with that value.
+`<sequence>` is compiled and evaluated similarly to a DoIt, with the `methodClass instanceClass` of the containing method as the receiver--that is, the receiver is `Object` whether the method is `Object>>foo` or `Object class>>foo`. Or, to put it another way, it is treated similarly to a class-side method. The value of the last statement is stored in the method's literal frame, and the expression is treated as a literal with that value.
+
+Some further notes:
+* In the case of a CTE within a DoIt, the DoIt itself will have been compiled as if it were a method of some class (`UndefinedObject`, in a playground, or the same as the active method, in the debugger), so we still have something to go on.
+* Class variables, shared pools, etc. are also bound as normal.
 
 CONSIDER: Should the value be made read-only (#isReadOnlyObject: true)? Mutating the value of a compile-time expression is obviously a really bad idea, but Dolphin does not do this. I don't see it as a major gotcha either way.
 
@@ -48,6 +52,8 @@ someLookupMethod: arg
 		yourself) at: arg
 ```
 
+This is a case where the value should clearly be read-only, and in _many_ (but not all) cases making only the top-level value read-only would be sufficient. However it is also often the case that it is trivially obvious that the value is never mutated, because it never leaves the method in which it is defined.
+
 There is also a clever trick that Dolphin uses all over the place to eliminate hard-coding the class name of the receiver:
 
 ```
@@ -62,7 +68,7 @@ Array>>isLiteral
 	^self class == ##(self) and: [self allSatisfy: [:each | each isLiteral]]
 ```
 
-We can also create truly-literal Arrays of classes, e.g. `#(##(Object) ##(Array))`, though in practice brace-array notation is probably superior. And, we can choose to reveal the intent of magic constants that have a direct literal representation, e.g. `seconds := days * ##(60 * 60 * 24)`.
+We can also create truly-literal Arrays of classes, e.g. `#(##(Object) ##(Array))`, though in practice brace-array notation is probably superior—the runtime cost is minimal, and I'd certainly prefer to see `{Object. Array}`. And, we can choose to reveal the intent of magic constants that have a direct literal representation, e.g. `seconds := days * ##(60 * 60 * 24)`.
 
 ## Implementation
 
