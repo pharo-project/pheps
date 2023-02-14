@@ -28,12 +28,9 @@ The PEP (Python) proposal includes a good history and motivation on the issue.
 The main effect is to adapt the state machine of `NumberParser` to accept and ignore underscore.
 A proof of concept is proposed as a distinct PR: https://github.com/pharo-project/pharo/pull/12479
 
-Note that acceptance of underscore will not be optional since `NumberParser` is used to parse Pharo numerics and deals with Pharo syntax specificity.
-E.g.
-
-```st
-(NumberParser parse: '2r10.01e2') >>> 9.0`.
-```
+Note that acceptance of underscore will not be optional since `NumberParser` is used to parse Pharo numerics and deals with Pharo syntax specificity that are not intended for generic number parsing.
+E.g. `(NumberParser parse: '2r10.01e2') >>> 9.0`.
+Note: in fact, `NumberParser` accepts a superset of Pharo language numeric as it accept special float strings. e.g. `(NumberParser parse: 'Infinity') >>> Float infinity`
 
 ## Backward compatibility
 
