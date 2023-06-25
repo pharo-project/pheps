@@ -10,7 +10,7 @@ PhEP {
 ```
 
 # Abstract 
-This PhEP describes the extension of Pharo numeric literals to accepts (and ignore) underscore characters (`_` ASCII 95).
+This PhEP describes the extension of Pharo numeric literals to accept (and ignore) underscore characters (`_` ASCII 95).
 
 # Motivation
 
