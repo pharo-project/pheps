@@ -28,21 +28,21 @@ The PEP (Python) proposal includes a good history and motivation on the issue.
 The main effect is to adapt the state machine of `NumberParser` to accept and ignore underscore.
 A proof of concept is proposed as a distinct PR: https://github.com/pharo-project/pharo/pull/12479
 
-Note that acceptance of underscore will not be optional since `NumberParser` is used to parse Pharo numerics and deals with Pharo syntax specificity that are not intended for generic number parsing.
+Note that acceptance of underscore will not be optional since `NumberParser` is used to parse Pharo numerics and deals with Pharo syntax specificity that is not intended for generic number parsing.
 E.g. `(NumberParser parse: '2r10.01e2') >>> 9.0`.
 Note: in fact, `NumberParser` accepts a superset of Pharo language numeric as it accept special float strings. e.g. `(NumberParser parse: 'Infinity') >>> Float infinity`
 
 ## Backward compatibility
 
-Existing valid numeric literals (without underscore) will still be parsed as the exact same numeric literals (including the combination of radix, decimal point and exponent parts).
+Existing valid numeric literals (without underscore) will still be parsed as the exact same numeric literals (including the combination of radix, decimal point, and exponent parts).
 
-The proposal will render valid literals that are currently. However, there is no expectation of problematic breakage.
+The proposal will render valid literals that are currently invalid. However, there is no expectation of problematic breakage.
 
 In Pharo code, number literals starting with a `_` will still be parsed as identifiers (because the first character is used to decide the type of the token). It is an acceptable behavior.
 
-The only issue might be in source code for selectors starting with an underscore and used on numeric literal without spacing. E.g. `10_foo` meaning `10 _foo` but a full search in the default image source code shows that (i) such call sites do not exist, (ii) there is only four selectors that start with `_` (all in the `ReferenceFinder` class that is not related to the numeric class hierarchy).
+The only issue might be in the source code for selectors starting with an underscore and used next to numeric literal without spacing. E.g. `10_foo` meaning `10 _foo`. A full search in the default image source code shows that (i) such call sites do not exist, (ii) there are only four selectors that start with `_` (all in the `ReferenceFinder` class that is not related to the numeric class hierarchy).
 
-Note that old Pharo parser will not be able to parse new numeric literal with `_`.
+Note that the old Pharo parser will not be able to parse new numeric literals with `_`.
 No specific plan is proposed to address this issue except updating the image with a newer NumberParser.
 Numeric objects and compiled methods are unaffected (since the internal object representation of numeric does not change).
 
@@ -50,7 +50,7 @@ Numeric objects and compiled methods are unaffected (since the internal object r
 
 ### In other languages
 
-Languages like Java, Python or Ruby add some constraints on the placement of `_` (with subtle differences between them).
+Languages like Java, Python, or Ruby add some constraints on the placement of `_` (with subtle differences between them).
 For instance, a common rule is no trailing `_`.
 
 ```
@@ -71,26 +71,26 @@ $ ruby -e 'print(1_)'
 print(1_)
 ```
 
-In these languages, such errors are HARD errors and correspond to a invalid numeric literal (not just a random illegal character).
+In these languages, such errors are HARD errors and correspond to an invalid numeric literal (not just a random illegal character).
 
 ### Proposal for Pharo
 
-Instead of a formal language definition or a list on complex rules, the following single rule is considered: LEGAL=*`_` is legal only between 2 digits*.
+Instead of a formal language definition or a list of complex rules, the following single rule is considered: LEGAL=*`_` is legal only between 2 digits*.
 
-This means that leading, trailing and duplicated `_` are forbidden including around special characters `r`, `.` and `e`.
+This means that leading, trailing, and duplicated `_` are forbidden even around special characters `r`, `.`, and `e`.
 
 * Examples of valid literals: `1`. `1_1`. `1_1.1_1`. `1_1r1_1.1_1e1_1`.
 * Examples of invalid literals: `_1`. `1_`. `1__1`. `1_.1`. `1_e1`.
 
-Here a discussion on  behaviors for Pharo are:
+Here a discussion on possible behaviors for Pharo:
 
 1. Implements LEGAL in the NumberParser class but still follows the principle of the longest valid numeric token.
 
    `1_1_a` will be parsed as `1_1` (longest valid literal according to LEGAL) followed by `_a` ie `11` (integer) and `_a` (unary message). No error or warning message.
 
-   This behavior is error prone since weird syntax will be unexpectedly and silently parsed as "something".
+   This behavior is error-prone since weird syntax will be unexpectedly and silently parsed as "something".
    However, this is the closest thing to the current behavior according to the current implementation. (e.g. can you guess how `16rDeADMAN1` is currently parsed?)
-   Syntax highlighting (both number literal and unknown message) and fast runtime error is expected to help the programmer to deal with these cases.
+   Syntax highlighting (both number literal and unknown message) and fast runtime error is expected to help the programmer deal with these cases.
 
 2. Implements LEGAL in the NumberParser class but introduce an alternative illegal numeric literal as possible token.
 
