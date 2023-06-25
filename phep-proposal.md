@@ -38,7 +38,7 @@ Existing valid numeric literals (without underscore) will still be parsed as the
 
 The proposal will render valid literals that are currently. However, there is no expectation of problematic breakage.
 
-In Smalltalk code, number literal starting with a `_` will still be parsed as identifiers (because the first character is used to decide the type of the token). It is an acceptable behavior.
+In Pharo code, number literals starting with a `_` will still be parsed as identifiers (because the first character is used to decide the type of the token). It is an acceptable behavior.
 
 The only issue might be in source code for selectors starting with an underscore and used on numeric literal without spacing. E.g. `10_foo` meaning `10 _foo` but a full search in the default image source code shows that (i) such call sites do not exist, (ii) there is only four selectors that start with `_` (all in the `ReferenceFinder` class that is not related to the numeric class hierarchy).
 
