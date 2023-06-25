@@ -107,7 +107,7 @@ Here a discussion on  behaviors for Pharo are:
    ie. `11` (integer) and `a` (unary message send).
    And that the editor/commit/etc. will complain about how ugly `1_1_` is.
 
-   The current PR advocates for this behavior since it (i) is the simplest thing to implement in `NumberParser`; (ii) move the responsibility of asserting ugliness and formatting to something more concerned about that (Rules, auto-formater, etc.); and (iii) this reduces the nitpicking and subtle differences between the specification of other languages. 
+   The current PR advocates for this behavior since it (i) is the simplest thing to implement in `NumberParser`; (ii) moves the responsibility of asserting ugliness and formatting to something more concerned about that (Rules, auto-formater, etc.); and (iii) this reduces the nitpicking and subtle differences between the specification of other languages. 
 
 
 # Out of scope
