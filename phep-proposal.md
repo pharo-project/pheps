@@ -99,7 +99,7 @@ Here a discussion on  behaviors for Pharo are:
    This behavior is the closest to the other considered languages (Java, Python, Ruby).
 
    Currently, `NumberParser`usually tries to parse until it can't. In most cases, the caller either accepts the longest valid numeric literal or complains if the whole input is not used.
-   The equivalent of "a bad formatted numeric token" is handled trough the method `NumberParser>>#expected:` that signals a runtime error or callback the client or UI (the ugliness of this design is out of the scope of the discussion). E.g. `NumberParser parse: '0r'`.
+   The equivalent of "a badly formatted numeric token" is handled through the method `NumberParser>>#expected:` that signals a runtime error or callback to the client or UI (the ugliness of this design is out of the scope of the discussion). E.g. `NumberParser parse: '0r'`.
 
 3. Accept unrestricted use of `_` at the parsing level (no constraints at all) following the existing principle of the longest valid numeric token. LEGAL is applied at a second step at the Rule level (ie as a critique/warning of bad style).
 
