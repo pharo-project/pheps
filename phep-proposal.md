@@ -115,5 +115,5 @@ Here a discussion on possible behaviors for Pharo:
 Printing methods of numbers (e.g. `asString`) could be "improved" by adding `_` in string representations of numbers to ease the reader.
 However, this PhEP does not address this (by default) as it might bring a lot of compatibility issues:
 
-* String representations that might be read by another parser that does not accepts `_`.
+* String representations that might be read by another parser that does not accept `_`.
 * String representations that expect a precise number of characters or a precise position of some digits.
