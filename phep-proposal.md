@@ -82,9 +82,18 @@ This means that leading, trailing, and duplicated `_` are forbidden even around 
 * Examples of valid literals: `1`. `1_1`. `1_1.1_1`. `1_1r1_1.1_1e1_1`.
 * Examples of invalid literals: `_1`. `1_`. `1__1`. `1_.1`. `1_e1`.
 
-Here a discussion on possible behaviors for Pharo:
+The rule LEGAL is to be implemented in the NumberParser class and introduce an alternative illegal numeric literal as possible token.
 
-1. Implements LEGAL in the NumberParser class but still follows the principle of the longest valid numeric token.
+* `1_1_a` will be parser as an error token `1_1_` ("numeric with trailing `_`") followed by the message send `a`.
+
+This behavior is the closest to the other considered languages (Java, Python, Ruby).
+
+Currently, `NumberParser`usually tries to parse until it can't. In most cases, the caller either accepts the longest valid numeric literal or complains if the whole input is not used.
+The equivalent of "a badly formatted numeric token" is handled through the method `NumberParser>>#expected:` that signals a runtime error or callback to the client or UI (the ugliness of this design is out of the scope of the discussion). E.g. `NumberParser parse: '0r'`.
+
+## Alternative but Rejected Policies
+
+*  Implements LEGAL in the NumberParser class but still follows the principle of the longest valid numeric token.
 
    `1_1_a` will be parsed as `1_1` (longest valid literal according to LEGAL) followed by `_a` ie `11` (integer) and `_a` (unary message). No error or warning message.
 
@@ -92,22 +101,13 @@ Here a discussion on possible behaviors for Pharo:
    However, this is the closest thing to the current behavior according to the current implementation. (e.g. can you guess how `16rDeADMAN1` is currently parsed?)
    Syntax highlighting (both number literal and unknown message) and fast runtime error is expected to help the programmer deal with these cases.
 
-2. Implements LEGAL in the NumberParser class but introduce an alternative illegal numeric literal as possible token.
-
-  `1_1_a` will be parser as an error token `1_1_` ("numeric with trailing `_`") followed by the message send `a`.
-
-   This behavior is the closest to the other considered languages (Java, Python, Ruby).
-
-   Currently, `NumberParser`usually tries to parse until it can't. In most cases, the caller either accepts the longest valid numeric literal or complains if the whole input is not used.
-   The equivalent of "a badly formatted numeric token" is handled through the method `NumberParser>>#expected:` that signals a runtime error or callback to the client or UI (the ugliness of this design is out of the scope of the discussion). E.g. `NumberParser parse: '0r'`.
-
-3. Accept unrestricted use of `_` at the parsing level (no constraints at all) following the existing principle of the longest valid numeric token. LEGAL is applied at a second step at the Rule level (ie as a critique/warning of bad style).
+*  Accept unrestricted use of `_` at the parsing level (no constraints at all) following the existing principle of the longest valid numeric token. LEGAL is applied at a second step at the Rule level (ie as a critique/warning of bad style).
 
    For instance, it means that `1_1_a` will be parsed as `1_1_` (longest unrestricted numeric literal) followed by `a`.
    ie. `11` (integer) and `a` (unary message send).
    And that the editor/commit/etc. will complain about how ugly `1_1_` is.
 
-   The current PR advocates for this behavior since it (i) is the simplest thing to implement in `NumberParser`; (ii) moves the responsibility of asserting ugliness and formatting to something more concerned about that (Rules, auto-formater, etc.); and (iii) this reduces the nitpicking and subtle differences between the specification of other languages. 
+   It is the simplest thing to implement in `NumberParser`.
 
 
 # Out of scope
