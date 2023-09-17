@@ -21,7 +21,7 @@ This proposal proposes a simple implementation to play with the idea.
 
 # Motivation
 
-Characters to express binary operators include ?.
+Characters to express binary operators include ? and this is not possible to use ? in selector or variable.
 
 # Description
 
