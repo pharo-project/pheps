@@ -12,7 +12,7 @@ PhEP {
 # Abstract 
 
 A proposal to be able to write literal collections in the same way we have DynamicArray.
-The proposal is based on the idea of Dave Mason to support `{:Set 1 . 2 . 1} to get a set with 2 elements.
+The proposal is based on the idea of Dave Mason to support `{:Set 1 . 2 . 1}` to get a set with 2 elements.
 
 # Changelog
 
