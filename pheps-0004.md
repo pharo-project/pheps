@@ -138,14 +138,24 @@ next
 For exclamation mark the situation is different
 
 ```
-(ByteSymbol allInstances select: [ :each | each isBinary ]) select: [ :each | each includes: $! ] #(#'!=' #'!==')
+> (ByteSymbol allInstances select: [ :each | each isBinary ]) select: [ :each | each includes: $! ]
+#(#'!=' #'!==')
 ```
 
-The value to use ! in selector that are not binary can be questionable because while in Scheme the pattern is to use ! to denote mutation, Pharo is an imperative language so it would not make sense to have method with exclamation mark in a normal situation. 
+The value to use $! in selector that are not binary can be questionable because while in Scheme the pattern is to use ! to denote mutation, Pharo is an imperative language so it would not make sense to have method with exclamation mark in a normal situation. 
+Now this can be nice for DSL.
 
-### About ? for binary selector AND in selector
+## Approaches
 
-An alternate approach (Both 1) that would not remove $? from binary characters would be to consider the role of space.
+We see three approaches
+- Excluding `$?` from the binary characters
+- Supporting `$?` in selector and keeping it as binary character (Both 1)
+- Supporting `$?` in selector and keeping it as binary character but after the first character (Both 2)
+
+
+### About ? for binary selector AND in selector (called both)
+
+**Both 1.** An alternate approach (Both 1) that would not remove $? from binary characters would be to consider the role of space.
 
 ```
 x ? foo
@@ -159,7 +169,7 @@ x ?foo
 
 would be a selector '?foo'
 
-Another alternate approach (Both 2) that would not remove $? from binary characters is to consider that selector cannot start with ? but can contain it.
+**Both 2.** Another alternate approach (Both 2) that would not remove $? from binary characters is to consider that selector cannot start with ? but can contain it.
 
 ```
 x ?foo
