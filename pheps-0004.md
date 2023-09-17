@@ -11,7 +11,7 @@ PhEP {
 
 # Abstract 
 
-A proposal to be able to write method selector with interrogation mark.
+A proposal to be able to write method selector with interrogation mark (after the first character).
 It is good for building better DSL and in the future better testing methods.
 This proposal proposes a simple implementation to play with the idea.
 
