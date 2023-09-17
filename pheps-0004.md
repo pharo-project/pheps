@@ -2,7 +2,7 @@
 PhEP {
 	#id: 0004,
 	#type: #image,
-	#title: 'Reserving ? in selector for DSL',
+	#title: 'Supporting ? in selector body',
 	#status: #submitted,
 	#authors: [ 'Stéphane Ducasse' ],
 	#created: '2023-09-17'
