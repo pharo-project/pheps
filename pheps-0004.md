@@ -2,8 +2,8 @@
 PhEP {
 	#id: 0004,
 	#type: #image,
-	#title: 'Reserving !? in selector for DSL',
-	#status: #accepted
+	#title: 'Reserving ? in selector for DSL',
+	#status: #submitted,
 	#authors: [ 'Stéphane Ducasse' ],
 	#created: '2023-09-17'
 }
