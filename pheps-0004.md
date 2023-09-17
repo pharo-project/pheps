@@ -145,7 +145,7 @@ The value to use ! in selector that are not binary can be questionable because w
 
 ### About ? for binary selector AND in selector
 
-An alternate approach that would not remove $? from binary characters would be to consider the role of space.
+An alternate approach (Both 1) that would not remove $? from binary characters would be to consider the role of space.
 
 ```
 x ? foo
@@ -159,9 +159,23 @@ x ?foo
 
 would be a selector '?foo'
 
-This approach has a benefit to make code more readable but at the cost of the possibility to introduce missbehaviors. 
+Another alternate approach (Both 2) that would not remove $? from binary characters is to consider that selector cannot start with ? but can contain it.
 
-As the author of the proposal at the time of writing I would favor this approach because it is more general and could be applied to other characters.
+```
+x ?foo
+```
+
+would be parsed as `x ? foo`
+
+```
+x foo?
+```
+
+would be a selector 'foo?'
+
+
+This approach (Both 2) has nice properties: we can use ? as binary and also in selector without ambiguities.
+As the author of the proposal at the time of writing I would favor this approach (both 2) because it is more general and could be applied to other characters.
 
 This alternate solution is backward compatible assuming that the author did format their method nicely which is the case in Pharo 12.
 
@@ -205,6 +219,16 @@ Character class >> specialCharacters
 Note that the current implementation is a bit strange since `Character class >> #specialCharacters` returns not the special characters for the parser but the characters for binary selectors. 
 Renaming `Character class >> #specialCharacters` to `Character class >> #binaryCharacters` could be a separated task.
 
-### Implementation Proposal (2): supporting both $? in binary selector and plain selector
+### Implementation Proposal (Both 2): 
 
-tobe done.
+Supporting both $? in binary selector and plain selector but $? cannot be first character.
+
+See https://github.com/Ducasse/PharoPossibleExtensions/tree/master/InterrogationMark
+
+
+
+
+
+
+
+
