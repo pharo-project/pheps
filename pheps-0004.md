@@ -186,7 +186,7 @@ RBScanner class >> initializeClassificationTable
 	self initializeChars: '01234567890' to: #digit.
 	self initializeChars: Character specialCharacters  to: #binary.
 	self initializeChars: '().:;[]{}^' to: #special.
-	self initializeChars: #($? $!) to: #alphabetic.
+	self initializeChars: #($?) to: #alphabetic.
 	self
 		initializeChars: (Character allByteCharacters
 			select: [ :each | each isSeparator ])
