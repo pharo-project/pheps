@@ -64,4 +64,4 @@ testNestedLiteralSet
 		equals:  (Set new add: 1 ; add: (Set new add: 2; add: 2; yourself);  add: 1 ;yourself).
 ```
 
-See https://github.com/Ducasse/PharoPossibleExtensions/
+See Pull Request https://github.com/pharo-project/pharo/pull/14845
