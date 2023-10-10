@@ -12,7 +12,7 @@ PhEP {
 # Abstract 
 
 A proposal to be able to write literal collections in the same way we have DynamicArray.
-The proposal is based on the idea of Dave Mason to support `{:Set 1 . 2 . 1}` to get a set with 2 elements. This approach works for any collection (assuming that they implement `withAll:`).
+The proposal is based on the idea of Dave Mason to support `{:Set 1 . 2 . 1}` to get a set with 2 elements. This approach works for any collection (assuming that they implement `withAll:`). Also some other objects could benefit from this new notation, e.g. `Point` or `Rectangle`. For this reason, it will be best to define a new selector that will be used by the Brace Litteral syntax: `withAllForBrace:`.
 
 # Changelog
 
@@ -46,7 +46,7 @@ In addition, we do not use another special character or character sequence such 
 
 ## Possible questions for another iteration
 
-The compiler could check that the class defines the method `withAll:`.
+The compiler could check that the class defines the method `withAllForBrace:`.
 
 # Implementation 
 
