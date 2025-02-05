@@ -1,10 +1,10 @@
 ﻿```
 PhEP {
-	#id: 0,
+	#id: 5,
 	#type: #image,
 	#title: 'Underscores in Numeric Literals',
 	#status: #discussion,
-	#authors: [ 'Jean Privat' ],
+	#authors: ['Jean Privat', 'Guillermo Polito'],
 	#created: '2023-02-13'
 }
 ```
@@ -26,7 +26,7 @@ The PEP (Python) proposal includes a good history and motivation on the issue.
 # Description
 
 The main effect is to adapt the state machine of `NumberParser` to accept and ignore underscore.
-A proof of concept is proposed as a distinct PR: https://github.com/pharo-project/pharo/pull/12479
+An implementation is proposed as a distinct PR: https://github.com/pharo-project/pharo/pull/17760
 
 Note that acceptance of underscore will not be optional since `NumberParser` is used to parse Pharo numerics and deals with Pharo syntax specificity that is not intended for generic number parsing.
 E.g. `(NumberParser parse: '2r10.01e2') >>> 9.0`.
